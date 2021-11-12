@@ -1,0 +1,3 @@
+dotnet ef dbcontext scaffold "server=.\SQLExpress;Database=Supermarket;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -d -c ApplicationDbContext --context-namespace Supermarket.Dal.EfStructures --context-dir EfStructures --no-onconfiguring -n Supermarket.Models.Entities -o ..\Supermarket.Models\Entities
+
+dotnet ef migrations add Initial -o EfStructures\Migrations -c Supermarket.Dal.EfStructures.ApplicationDbContext
