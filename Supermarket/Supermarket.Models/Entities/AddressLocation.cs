@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Supermarket.Models.Entities
 {
     [Table("address_location")]
-    public partial class AddressLocation
+    public partial class AddressLocation : BaseEntity
     {
         public AddressLocation()
         {

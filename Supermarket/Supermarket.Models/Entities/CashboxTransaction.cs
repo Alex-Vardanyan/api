@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Supermarket.Models.Entities
 {
     [Table("cashbox_transaction")]
-    public partial class CashboxTransaction
+    public partial class CashboxTransaction : BaseEntity
     {
         public CashboxTransaction()
         {

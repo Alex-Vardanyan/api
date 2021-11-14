@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Supermarket.Models.Entities
 {
     [Table("dispose_package")]
-    public partial class DisposePackage
+    public partial class DisposePackage : BaseEntity
     {
         [Key]
         [Column("id")]

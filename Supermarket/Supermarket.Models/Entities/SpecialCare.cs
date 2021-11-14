@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Supermarket.Models.Entities
 {
     [Table("special_care")]
-    public partial class SpecialCare
+    public partial class SpecialCare : BaseEntity
     {
         [Key]
         [Column("product_id")]

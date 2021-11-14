@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Supermarket.Models.Entities
 {
     [Table("wish_list")]
-    public partial class WishList
+    public partial class WishList : BaseEntity
     {
         [Key]
         [Column("product_id")]

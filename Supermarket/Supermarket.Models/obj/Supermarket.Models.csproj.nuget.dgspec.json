@@ -46,7 +46,7 @@
             },
             "System.Text.Json": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[5.0.2, )"
             }
           },
           "imports": [

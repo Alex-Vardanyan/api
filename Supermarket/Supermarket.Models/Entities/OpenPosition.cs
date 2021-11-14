@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Supermarket.Models.Entities
 {
     [Table("open_positions")]
-    public partial class OpenPosition
+    public partial class OpenPosition : BaseEntity
     {
         [Key]
         [Column("id")]

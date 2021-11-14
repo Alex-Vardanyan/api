@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Supermarket.Models.Entities
 {
     [Table("log_sessions")]
-    public partial class LogSession
+    public partial class LogSession : BaseEntity
     {
         [Key]
         [Column("id")]

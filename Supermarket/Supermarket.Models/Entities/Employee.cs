@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Supermarket.Models.Entities
 {
     [Table("employee")]
-    public partial class Employee
+    public partial class Employee : BaseEntity
     {
         public Employee()
         {
