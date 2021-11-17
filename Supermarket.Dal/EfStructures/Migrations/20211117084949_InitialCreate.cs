@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Supermarket.Dal.EfStructures.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -411,7 +411,8 @@ namespace Supermarket.Dal.EfStructures.Migrations
                     volume = table.Column<int>(type: "int", nullable: true),
                     refunded = table.Column<bool>(type: "bit", nullable: true),
                     supplier_id = table.Column<int>(type: "int", nullable: true),
-                    category_id = table.Column<int>(type: "int", nullable: true)
+                    category_id = table.Column<int>(type: "int", nullable: true),
+                    image_url = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {

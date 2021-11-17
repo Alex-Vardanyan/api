@@ -14,5 +14,7 @@ namespace Supermarket.Api.Dtos
         public int? Code { get; set; }
         public string Category { get; set; }
         public string Supplier { get; set; }
+
+        public string ImageUrl { get; set; }
     }
 }

@@ -48,6 +48,9 @@ namespace Supermarket.Models.Entities
         public int? SupplierId { get; set; }
         [Column("category_id")]
         public int? CategoryId { get; set; }
+        [Column("image_url")]
+        [StringLength(100)]
+        public string ImageUrl { get; set; }
 
         [ForeignKey(nameof(CategoryId))]
         [InverseProperty("Products")]

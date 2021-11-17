@@ -14,7 +14,8 @@ namespace Supermarket.Api.Helpers
         {
             CreateMap<Product, ProductToReturnDto>()
                 .ForMember(x => x.Category, o => o.MapFrom(s => s.Category.Description))
-                .ForMember(x => x.Supplier, o => o.MapFrom(s => s.Supplier.Name));
+                .ForMember(x => x.Supplier, o => o.MapFrom(s => s.Supplier.Name))
+                .ForMember(x => x.ImageUrl, o => o.MapFrom<ProductUrlResolver>());
         }
     }
 }
