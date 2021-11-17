@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Supermarket.Api.Helpers;
 using Supermarket.Dal.EfStructures;
 using Supermarket.Models.Interfaces;
 using System;
@@ -29,6 +30,7 @@ namespace Supermarket.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(MappingProfiles));
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(_config.GetConnectionString("DefaultConnection")));

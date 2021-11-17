@@ -140,3 +140,4 @@ C:\Users\User\source\repos\Supermarket\Supermarket.Api\bin\Debug\net5.0\Supermar
 C:\Users\User\source\repos\Supermarket\Supermarket.Api\bin\Debug\net5.0\Supermarket.Dal.pdb
 C:\Users\User\source\repos\Supermarket\Supermarket.Api\bin\Debug\net5.0\Supermarket.Models.pdb
 C:\Users\User\source\repos\Supermarket\Supermarket.Api\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\User\source\repos\Supermarket\Supermarket.Api\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

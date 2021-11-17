@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Supermarket.Api.Dtos;
 using Supermarket.Dal.EfStructures;
 using Supermarket.Models.Entities;
 using Supermarket.Models.Interfaces;
@@ -19,28 +21,33 @@ namespace Supermarket.Api.Controllers
         private readonly IGenericRepository<Product> _productsRepo;
         private readonly IGenericRepository<Supplier> _productSupplierRepo;
         private readonly IGenericRepository<Category> _productCategoryRepo;
+        private readonly IMapper _mapper;
 
-        public ProductsController(IGenericRepository<Product> productsRepo, IGenericRepository<Supplier> productSupplierRepo, IGenericRepository<Category> productCategoryRepo)
+        public ProductsController(IGenericRepository<Product> productsRepo,
+            IGenericRepository<Supplier> productSupplierRepo, IGenericRepository<Category> productCategoryRepo,
+            IMapper mapper)
         {
             _productsRepo = productsRepo;
             _productSupplierRepo = productSupplierRepo;
             _productCategoryRepo = productCategoryRepo;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts()
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts()
         {
             var spec = new ProductsWithSupplierAndCategorySpecification();
             var Products = await _productsRepo.ListAsync(spec);
 
-            return Ok(Products);
+            return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(Products));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduc(int id)
+        public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             var spec = new ProductsWithSupplierAndCategorySpecification(id);
-            return await _productsRepo.GetEntityWithSpec(spec);
+            var Product = await _productsRepo.GetEntityWithSpec(spec);
+            return _mapper.Map<Product, ProductToReturnDto>(Product);
         }
 
         [HttpGet("Suppliers")]

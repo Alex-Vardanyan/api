@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "0kImFVh6u7J7mb0Ra9Xy8/rQC+M5y/HRtAX1ElSKtdIyu0B/QkptQe5hY3fL+Ioja9pZY7HTvc+mdvQotrZjdQ==",
+  "dgSpecHash": "/QYUHfS90r9eBXe9T+h/mNSxJyDEJSswErqMXeIgsIRuQi2U50+anw4R1wO2L6Ty5frgpsduS96PCkpGSKqZPg==",
   "success": true,
   "projectFilePath": "C:\\Users\\User\\source\\repos\\Supermarket\\Supermarket.Api\\Supermarket.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
