@@ -13,7 +13,7 @@ namespace Supermarket.Api.Helpers
     {
         private readonly IConfiguration _config;
 
-        public PublicUrlResolver(IConfiguration config)
+        public ProductUrlResolver(IConfiguration config)
         {
             _config = config;
         }

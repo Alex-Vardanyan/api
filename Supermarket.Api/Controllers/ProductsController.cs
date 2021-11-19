@@ -13,10 +13,7 @@ using System.Threading.Tasks;
 
 namespace Supermarket.Api.Controllers
 {
-
-    [Controller]
-    [Route("api/[controller]")]
-    public class ProductsController : ControllerBase
+    public class ProductsController : BaseApiController 
     {
         private readonly IGenericRepository<Product> _productsRepo;
         private readonly IGenericRepository<Supplier> _productSupplierRepo;
