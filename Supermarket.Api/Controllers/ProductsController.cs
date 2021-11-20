@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Supermarket.Api.Dtos;
+using Supermarket.Api.Errors;
 using Supermarket.Dal.EfStructures;
 using Supermarket.Models.Entities;
 using Supermarket.Models.Interfaces;
@@ -40,10 +42,17 @@ namespace Supermarket.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             var spec = new ProductsWithSupplierAndCategorySpecification(id);
             var Product = await _productsRepo.GetEntityWithSpec(spec);
+
+            if(Product == null)
+            {
+                return NotFound(new ApiResponse(404));
+            }
             return _mapper.Map<Product, ProductToReturnDto>(Product);
         }
 

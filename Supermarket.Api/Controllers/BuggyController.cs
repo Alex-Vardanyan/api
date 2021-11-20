@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Supermarket.Api.Errors;
 using Supermarket.Dal.EfStructures;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Supermarket.Api.Controllers
 {
+    // Example
     public class BuggyController : BaseApiController
     {
         private readonly ApplicationDbContext _context;
@@ -24,7 +26,7 @@ namespace Supermarket.Api.Controllers
 
             if(thing == null)
             {
-                return NotFound();
+                return NotFound(new ApiResponse(404));
             }
 
             return Ok();
@@ -42,7 +44,7 @@ namespace Supermarket.Api.Controllers
         [HttpGet("badrequest")]
         public ActionResult GetBadRequest()
         {
-            return BadRequest();
+            return BadRequest(new ApiResponse(400));
         }
 
         [HttpGet("badrequest/{id}")]
