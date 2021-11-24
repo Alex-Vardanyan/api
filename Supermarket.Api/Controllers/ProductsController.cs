@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Supermarket.Api.Dtos;
 using Supermarket.Api.Errors;
+using Supermarket.Api.Helpers;
 using Supermarket.Dal.EfStructures;
 using Supermarket.Models.Entities;
 using Supermarket.Models.Interfaces;
@@ -33,12 +34,18 @@ namespace Supermarket.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts()
+        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery]ProductSpecParams productParams)
         {
-            var spec = new ProductsWithSupplierAndCategorySpecification();
+            var spec = new ProductsWithSupplierAndCategorySpecification(productParams);
+
+            var countSpec = new ProductsWithSupplierAndCategorySpecification(productParams);
+            var totalItems = await _productsRepo.CountAsync(countSpec);
+
             var Products = await _productsRepo.ListAsync(spec);
 
-            return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(Products));
+            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(Products);
+
+            return (new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
         }
 
         [HttpGet("{id}")]

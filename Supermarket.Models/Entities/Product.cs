@@ -49,7 +49,7 @@ namespace Supermarket.Models.Entities
         [Column("category_id")]
         public int? CategoryId { get; set; }
         [Column("image_url")]
-        [StringLength(100)]
+        [StringLength(250)]
         public string ImageUrl { get; set; }
 
         [ForeignKey(nameof(CategoryId))]

@@ -14,5 +14,10 @@ namespace Supermarket.Models.Specifications
         {
             AddInclude(x => x.Location);
         }
+
+        public WarehousesWithLocationSpecification(int id) : base(x => x.Id == id)
+        {
+            AddInclude(x => x.Location);
+        }
     }
 }

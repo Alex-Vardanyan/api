@@ -22,6 +22,11 @@ namespace Supermarket.Api.Helpers
                 .ForMember(x => x.District, o => o.MapFrom(s => s.Location.District))
                 .ForMember(x => x.Street, o => o.MapFrom(s => s.Location.Street))
                 .ForMember(x => x.BuildingNumber, o => o.MapFrom(s => s.Location.BuildingNumber));
+
+            CreateMap<ProductPackage, PackageToReturnDto>()
+                .ForMember(x => x.Prod, o => o.MapFrom(s => s.Prod.Name))
+                .ForMember(x => x.FrVolume, o => o.MapFrom(s => s.Prod.SpecialCare == null ? null : s.Prod.Volume))
+                .ForMember(x => x.Volume, o => o.MapFrom(s => s.Prod.SpecialCare == null ? s.Prod.Volume : null));
         }
     }
 }

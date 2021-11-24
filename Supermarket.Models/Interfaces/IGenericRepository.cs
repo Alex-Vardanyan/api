@@ -17,5 +17,7 @@ namespace Supermarket.Models.Interfaces
 
         Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
 
+        Task<int> CountAsync(ISpecification<T> spec);
+
     }
 }
