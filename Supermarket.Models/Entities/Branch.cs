@@ -22,6 +22,7 @@ namespace Supermarket.Models.Entities
             Orders = new HashSet<Order>();
             ProductPackages = new HashSet<ProductPackage>();
             Shippings = new HashSet<Shipping>();
+            WarehouseJobs = new HashSet<WarehouseJob>();
         }
 
         [Key]
@@ -58,5 +59,8 @@ namespace Supermarket.Models.Entities
         public virtual ICollection<ProductPackage> ProductPackages { get; set; }
         [InverseProperty(nameof(Shipping.DestinationBranch))]
         public virtual ICollection<Shipping> Shippings { get; set; }
+
+        [InverseProperty(nameof(WarehouseJob.Branch))]
+        public virtual ICollection<WarehouseJob> WarehouseJobs { get; set; }
     }
 }

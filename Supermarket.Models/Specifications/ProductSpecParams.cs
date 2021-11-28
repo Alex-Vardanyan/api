@@ -23,7 +23,7 @@ namespace Supermarket.Models.Specifications
         public int? DepartmentId { get; set; }
         public string? Sort { get; set; }
 
-        private string _search;
+        private string _search = string.Empty;
         public string Search
         {
             get => _search;

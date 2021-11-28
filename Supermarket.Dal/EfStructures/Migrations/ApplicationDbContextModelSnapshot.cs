@@ -704,8 +704,8 @@ namespace Supermarket.Dal.EfStructures.Migrations
                         .HasColumnName("description");
 
                     b.Property<string>("ImageUrl")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
                         .HasColumnName("image_url");
 
                     b.Property<string>("Name")
@@ -966,6 +966,10 @@ namespace Supermarket.Dal.EfStructures.Migrations
                         .HasColumnType("int")
                         .HasColumnName("jobs_id");
 
+                    b.Property<int>("BranchId")
+                        .HasColumnType("int")
+                        .HasColumnName("branch_id");
+
                     b.Property<int?>("LogisticsId")
                         .HasColumnType("int")
                         .HasColumnName("logistics_id");
@@ -976,6 +980,8 @@ namespace Supermarket.Dal.EfStructures.Migrations
 
                     b.HasKey("JobsId")
                         .HasName("PK__warehous__2696017D04CBC392");
+
+                    b.HasIndex("BranchId");
 
                     b.HasIndex("LogisticsId");
 
@@ -1396,6 +1402,12 @@ namespace Supermarket.Dal.EfStructures.Migrations
 
             modelBuilder.Entity("Supermarket.Models.Entities.WarehouseJob", b =>
                 {
+                    b.HasOne("Supermarket.Models.Entities.Branch", "Branch")
+                        .WithMany("WarehouseJobs")
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Supermarket.Models.Entities.Job", "Jobs")
                         .WithOne("WarehouseJob")
                         .HasForeignKey("Supermarket.Models.Entities.WarehouseJob", "JobsId")
@@ -1411,6 +1423,8 @@ namespace Supermarket.Dal.EfStructures.Migrations
                         .WithMany("WarehouseJobs")
                         .HasForeignKey("ShippingId")
                         .HasConstraintName("FK__warehouse__shipp__19DFD96B");
+
+                    b.Navigation("Branch");
 
                     b.Navigation("Jobs");
 
@@ -1487,6 +1501,8 @@ namespace Supermarket.Dal.EfStructures.Migrations
                     b.Navigation("ProductPackages");
 
                     b.Navigation("Shippings");
+
+                    b.Navigation("WarehouseJobs");
                 });
 
             modelBuilder.Entity("Supermarket.Models.Entities.Cashbox", b =>

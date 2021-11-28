@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace Supermarket.Api.Dtos
 {
-    public class ProductToReturnDto
+    public class ProductFullInfoDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal? Price { get; set; }
+        public decimal? Cost { get; set; }
         public int? Code { get; set; }
-        public string Supplier { get; set; }
-        public string ImageUrl { get; set; }
+        public int? Volume { get; set; }
+        public bool? Refunded { get; set; }
+        public string Category { get; set; }
         public string Department { get; set; }
-        public int? Amount { get; set; }
     }
 }

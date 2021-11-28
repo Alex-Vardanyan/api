@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Supermarket.Dal.EfStructures.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitailCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -412,7 +412,7 @@ namespace Supermarket.Dal.EfStructures.Migrations
                     refunded = table.Column<bool>(type: "bit", nullable: true),
                     supplier_id = table.Column<int>(type: "int", nullable: true),
                     category_id = table.Column<int>(type: "int", nullable: true),
-                    image_url = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                    image_url = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -759,7 +759,8 @@ namespace Supermarket.Dal.EfStructures.Migrations
                 {
                     jobs_id = table.Column<int>(type: "int", nullable: false),
                     shipping_id = table.Column<int>(type: "int", nullable: true),
-                    logistics_id = table.Column<int>(type: "int", nullable: true)
+                    logistics_id = table.Column<int>(type: "int", nullable: true),
+                    branch_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -782,6 +783,12 @@ namespace Supermarket.Dal.EfStructures.Migrations
                         principalTable: "shipping",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_warehouse_jobs_branch_branch_id",
+                        column: x => x.branch_id,
+                        principalTable: "branch",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -958,6 +965,11 @@ namespace Supermarket.Dal.EfStructures.Migrations
                 name: "IX_transaction_product_product_id",
                 table: "transaction_product",
                 column: "product_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_warehouse_jobs_branch_id",
+                table: "warehouse_jobs",
+                column: "branch_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_warehouse_jobs_logistics_id",

@@ -18,6 +18,8 @@ namespace Supermarket.Models.Entities
         public int? ShippingId { get; set; }
         [Column("logistics_id")]
         public int? LogisticsId { get; set; }
+        [Column("branch_id")]
+        public int BranchId { get; set; }
 
         [ForeignKey(nameof(JobsId))]
         [InverseProperty(nameof(Job.WarehouseJob))]
@@ -28,5 +30,9 @@ namespace Supermarket.Models.Entities
         [ForeignKey(nameof(ShippingId))]
         [InverseProperty("WarehouseJobs")]
         public virtual Shipping Shipping { get; set; }
+
+        [ForeignKey(nameof(BranchId))]
+        [InverseProperty("WarehouseJobs")]
+        public virtual Branch Branch { get; set; }
     }
 }
