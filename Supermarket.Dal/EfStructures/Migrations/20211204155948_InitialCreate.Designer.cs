@@ -10,8 +10,8 @@ using Supermarket.Dal.EfStructures;
 namespace Supermarket.Dal.EfStructures.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211126180144_InitailCreate")]
-    partial class InitailCreate
+    [Migration("20211204155948_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -428,7 +428,7 @@ namespace Supermarket.Dal.EfStructures.Migrations
                         .HasColumnType("money")
                         .HasColumnName("starting_salary");
 
-                    b.Property<int?>("UsersId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int")
                         .HasColumnName("users_id");
 
@@ -442,7 +442,9 @@ namespace Supermarket.Dal.EfStructures.Migrations
 
                     b.HasIndex("ProfessionId");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[users_id] IS NOT NULL");
 
                     b.ToTable("employee");
                 });
@@ -943,13 +945,6 @@ namespace Supermarket.Dal.EfStructures.Migrations
                         .HasColumnType("nvarchar(64)")
                         .HasColumnName("email");
 
-                    b.Property<string>("Passwd")
-                        .HasMaxLength(64)
-                        .IsUnicode(false)
-                        .HasColumnType("char(64)")
-                        .HasColumnName("passwd")
-                        .IsFixedLength(true);
-
                     b.Property<string>("Username")
                         .HasMaxLength(20)
                         .IsUnicode(false)
@@ -1177,9 +1172,9 @@ namespace Supermarket.Dal.EfStructures.Migrations
                         .HasForeignKey("ProfessionId")
                         .HasConstraintName("FK__employee__profes__7F2BE32F");
 
-                    b.HasOne("Supermarket.Models.Entities.User", "Users")
-                        .WithMany("Employees")
-                        .HasForeignKey("UsersId")
+                    b.HasOne("Supermarket.Models.Entities.User", "User")
+                        .WithOne("Employee")
+                        .HasForeignKey("Supermarket.Models.Entities.Employee", "UserId")
                         .HasConstraintName("FK__employee__users___7D439ABD");
 
                     b.Navigation("Address");
@@ -1190,7 +1185,7 @@ namespace Supermarket.Dal.EfStructures.Migrations
 
                     b.Navigation("Profession");
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Supermarket.Models.Entities.Job", b =>
@@ -1611,7 +1606,7 @@ namespace Supermarket.Dal.EfStructures.Migrations
 
                     b.Navigation("Deliveryman");
 
-                    b.Navigation("Employees");
+                    b.Navigation("Employee");
 
                     b.Navigation("Jobs");
 

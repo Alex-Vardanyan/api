@@ -45,6 +45,15 @@ namespace Supermarket.Api.Helpers
             CreateMap<Product, ProductFullInfoDto>()
                 .ForMember(x => x.Category, o => o.MapFrom(s => s.Category.Description))
                 .ForMember(x => x.Department, o => o.MapFrom(s => s.Category.Department.Name));
+
+            CreateMap<User, UserOverviewDto>()
+                .ForMember(x => x.FirstName, o => o.MapFrom(s => s.Customer.FirstName == null ? s.Employee.FirstName : s.Customer.FirstName))
+                .ForMember(x => x.LastName, o => o.MapFrom(s => s.Customer.LastName == null ? s.Employee.LastName : s.Customer.LastName))
+                .ForMember(x => x.PhoneNumber, o => o.MapFrom(s => s.Customer.PhoneNumber == null ? s.Employee.PhoneNumber : s.Customer.PhoneNumber))
+                .ForMember(x => x.City, o => o.MapFrom(s => s.Customer.Address.City == null ? s.Employee.Address.City : s.Customer.Address.City))
+                .ForMember(x => x.District, o => o.MapFrom(s => s.Customer.Address.District == null ? s.Employee.Address.District : s.Customer.Address.District))
+                .ForMember(x => x.Street, o => o.MapFrom(s => s.Customer.Address.Street == null ? s.Employee.Address.Street : s.Customer.Address.Street))
+                .ForMember(x => x.BuildingNumber, o => o.MapFrom(s => s.Customer.Address.BuildingNumber == null ? s.Employee.Address.BuildingNumber : s.Customer.Address.BuildingNumber));
         }
     }
 }

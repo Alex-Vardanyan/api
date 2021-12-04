@@ -13,6 +13,7 @@ using Supermarket.Api.Extensions;
 using Supermarket.Api.Helpers;
 using Supermarket.Api.Middleware;
 using Supermarket.Dal.EfStructures;
+using Supermarket.Dal.Identity;
 using Supermarket.Models.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -36,9 +37,10 @@ namespace Supermarket.Api
             services.AddAutoMapper(typeof(MappingProfiles));
             
             services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(_config.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AppIdentityDbContext>(x => x.UseSqlServer(_config.GetConnectionString("IdentityConnection")));
             services.AddControllers();
             services.AddApplicationServices();
-
+            services.AddIdentityServices(_config);
             services.AddSwaggerDocumentation();
             services.AddCors(opt =>
             {
@@ -62,6 +64,8 @@ namespace Supermarket.Api
             app.UseRouting();
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

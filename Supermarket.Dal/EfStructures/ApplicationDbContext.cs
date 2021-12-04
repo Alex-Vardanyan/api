@@ -270,11 +270,12 @@ namespace Supermarket.Dal.EfStructures
                 entity.HasOne(d => d.Profession)
                     .WithMany(p => p.Employees)
                     .HasForeignKey(d => d.ProfessionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__employee__profes__7F2BE32F");
 
-                entity.HasOne(d => d.Users)
-                    .WithMany(p => p.Employees)
-                    .HasForeignKey(d => d.UsersId)
+                entity.HasOne(d => d.User)
+                    .WithOne(p => p.Employee)
+                    .HasForeignKey<Employee>(d => d.UserId)
                     .HasConstraintName("FK__employee__users___7D439ABD");
             });
 
@@ -456,10 +457,6 @@ namespace Supermarket.Dal.EfStructures
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.Passwd)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
-
                 entity.Property(e => e.Username)
                     .IsUnicode(false)
                     .IsFixedLength(true);

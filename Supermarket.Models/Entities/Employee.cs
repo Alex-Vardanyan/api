@@ -20,7 +20,7 @@ namespace Supermarket.Models.Entities
         [Column("id")]
         public int Id { get; set; }
         [Column("users_id")]
-        public int? UsersId { get; set; }
+        public int? UserId { get; set; }
         [Column("first_name")]
         [StringLength(50)]
         public string FirstName { get; set; }
@@ -64,9 +64,9 @@ namespace Supermarket.Models.Entities
         [ForeignKey(nameof(ProfessionId))]
         [InverseProperty(nameof(Proffesion.Employees))]
         public virtual Proffesion Profession { get; set; }
-        [ForeignKey(nameof(UsersId))]
-        [InverseProperty(nameof(User.Employees))]
-        public virtual User Users { get; set; }
+        [ForeignKey(nameof(UserId))]
+        [InverseProperty("Employee")]
+        public virtual User User { get; set; }
         [InverseProperty(nameof(CashboxTransaction.CashierNavigation))]
         public virtual ICollection<CashboxTransaction> CashboxTransactions { get; set; }
     }

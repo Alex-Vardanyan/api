@@ -13,7 +13,6 @@ namespace Supermarket.Models.Entities
     {
         public User()
         {
-            Employees = new HashSet<Employee>();
             Jobs = new HashSet<Job>();
             LogSessions = new HashSet<LogSession>();
             OrderCustomers = new HashSet<Order>();
@@ -30,16 +29,13 @@ namespace Supermarket.Models.Entities
         [Column("username")]
         [StringLength(20)]
         public string Username { get; set; }
-        [Column("passwd")]
-        [StringLength(64)]
-        public string Passwd { get; set; }
 
         [InverseProperty("User")]
         public virtual Customer Customer { get; set; }
         [InverseProperty("Employee")]
         public virtual Deliveryman Deliveryman { get; set; }
-        [InverseProperty(nameof(Employee.Users))]
-        public virtual ICollection<Employee> Employees { get; set; }
+        [InverseProperty("User")]
+        public virtual Employee Employee { get; set; }
         [InverseProperty(nameof(Job.Employee))]
         public virtual ICollection<Job> Jobs { get; set; }
         [InverseProperty(nameof(LogSession.User))]

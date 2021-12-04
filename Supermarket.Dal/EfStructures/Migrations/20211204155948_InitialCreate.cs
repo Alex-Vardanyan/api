@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Supermarket.Dal.EfStructures.Migrations
 {
-    public partial class InitailCreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -84,8 +84,7 @@ namespace Supermarket.Dal.EfStructures.Migrations
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     email = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
-                    username = table.Column<string>(type: "char(20)", unicode: false, fixedLength: true, maxLength: 20, nullable: true),
-                    passwd = table.Column<string>(type: "char(64)", unicode: false, fixedLength: true, maxLength: 64, nullable: true)
+                    username = table.Column<string>(type: "char(20)", unicode: false, fixedLength: true, maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -859,7 +858,9 @@ namespace Supermarket.Dal.EfStructures.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_employee_users_id",
                 table: "employee",
-                column: "users_id");
+                column: "users_id",
+                unique: true,
+                filter: "[users_id] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_jobs_employee_id",

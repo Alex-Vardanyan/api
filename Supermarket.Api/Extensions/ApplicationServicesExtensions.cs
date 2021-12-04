@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Supermarket.Api.Errors;
 using Supermarket.Dal.EfStructures;
+using Supermarket.Dal.Services;
 using Supermarket.Models.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace Supermarket.Api.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IProductRepository, ProductRepository>();
             services.Configure<ApiBehaviorOptions>(options =>
