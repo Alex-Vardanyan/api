@@ -46,7 +46,7 @@ namespace Supermarket.Api.Controllers
             return new UserDto
             {
                 Email = user.Email,
-                Token = _tokenService.CreateToken(user),
+                Token = await _tokenService.CreateToken(user),
                 Username = user.UserName
             };
         }
@@ -81,7 +81,7 @@ namespace Supermarket.Api.Controllers
             return new UserDto
             {
                 Email = user.Email,
-                Token = _tokenService.CreateToken(user),
+                Token =  await _tokenService.CreateToken(user),
                 Username = user.UserName
             };
         }
@@ -94,21 +94,27 @@ namespace Supermarket.Api.Controllers
                 UserName = registerDto.Username,
                 Email = registerDto.Email,
             };
-            var userExists = await _userManager.FindByEmailAsync(user.Email);
-            if (userExists != null)
+            var existingUser = await _userManager.FindByEmailAsync(user.Email);
+            if (existingUser != null)
             {
-                return BadRequest(new ApiResponse(400, "An account with this email is already in use"));
+                return new BadRequestObjectResult(new ValidationErrorResponse{ Errors = new[] { "An account with this email is already in use" } });
             }
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (!result.Succeeded)
             {
-                return BadRequest(new ApiResponse(400, "Your password must be at least 6 characters long and contain at least 1 number and 1 symbol"));
+                return BadRequest(new ApiResponse(400));
+            }
+
+            var roleResult = await _userManager.AddToRoleAsync(user, "Client");
+            if (!roleResult.Succeeded)
+            {
+                return BadRequest(new ApiResponse(400));
             }
 
             return new UserDto
             {
                 Username = registerDto.Username,
-                Token = _tokenService.CreateToken(user),
+                Token = await _tokenService.CreateToken(user),
                 Email = registerDto.Email
             };
         }

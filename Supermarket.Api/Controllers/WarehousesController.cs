@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Supermarket.Api.Dtos;
@@ -27,6 +28,7 @@ namespace Supermarket.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "Warehouse Admin")]
         public async Task<ActionResult<IReadOnlyList<WarehouseToReturnDto>>> GetBranches()
         {
             var spec = new WarehousesWithLocationSpecification();
@@ -37,6 +39,7 @@ namespace Supermarket.Api.Controllers
 
 
         [HttpGet("{id}")]
+        [Authorize(Policy = "Warehouse Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<WarehousePackagesToReturnDto>> GetBranchBy(int id)

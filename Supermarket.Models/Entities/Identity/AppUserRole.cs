@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Supermarket.Models.Entities.Identity
 {
-    public class AppUser : IdentityUser<int>
+    public class AppUserRole : IdentityUserRole<int>
     {
-        public ICollection<AppUserRole> UserRoles { get; set; }
+        public AppUser User { get; set; }
+        public AppRole Role { get; set; }
     }
 }

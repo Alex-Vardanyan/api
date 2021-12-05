@@ -779,11 +779,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\source\\repos\\something\\Supermarket\\Supermarket.Models\\Supermarket.Models.csproj",
+      "projectUniqueName": "C:\\Users\\User\\source\\repos\\Supermarket\\Supermarket.Models\\Supermarket.Models.csproj",
       "projectName": "Supermarket.Models",
-      "projectPath": "C:\\Users\\User\\source\\repos\\something\\Supermarket\\Supermarket.Models\\Supermarket.Models.csproj",
+      "projectPath": "C:\\Users\\User\\source\\repos\\Supermarket\\Supermarket.Models\\Supermarket.Models.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\source\\repos\\something\\Supermarket\\Supermarket.Models\\obj\\",
+      "outputPath": "C:\\Users\\User\\source\\repos\\Supermarket\\Supermarket.Models\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

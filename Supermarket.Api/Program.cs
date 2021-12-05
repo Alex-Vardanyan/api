@@ -30,9 +30,10 @@ namespace Supermarket.Api
                     await context.Database.MigrateAsync();
 
                     var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                    var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
                     var identityContext = services.GetRequiredService<AppIdentityDbContext>();
                     await identityContext.Database.MigrateAsync();
-                    await AppIdentityDbContextSeed.SeedUserAsync(userManager);
+                    await AppIdentityDbContextSeed.SeedUserAsync(userManager, roleManager);
                 }
                 catch (Exception ex)
                 {

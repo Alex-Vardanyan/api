@@ -17,10 +17,14 @@ namespace Supermarket.Api.Extensions
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
-            var builder = services.AddIdentityCore<AppUser>();
-            builder = new IdentityBuilder(builder.UserType, builder.Services);
-            builder.AddEntityFrameworkStores<AppIdentityDbContext>();
-            builder.AddSignInManager<SignInManager<AppUser>>();
+            //var builder = 
+                services.AddIdentityCore<AppUser>(opt => { opt.Password.RequireNonAlphanumeric = false; opt.Password.RequiredLength = 8; })
+                .AddRoles<AppRole>().AddRoleManager<RoleManager<AppRole>>()
+                .AddSignInManager<SignInManager<AppUser>>().AddRoleValidator<RoleValidator<AppRole>>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>();
+            //builder = new IdentityBuilder(builder.UserType, builder.Services);
+            //builder.AddEntityFrameworkStores<AppIdentityDbContext>();
+            //builder.AddSignInManager<SignInManager<AppUser>>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -33,6 +37,11 @@ namespace Supermarket.Api.Extensions
                         ValidateAudience = false,
                     };
                 });
+
+            services.AddAuthorization(opt => {
+                opt.AddPolicy("Warehouse", policy => policy.RequireRole("Warehouse Worker", "Warehouse Manager", "Master"));
+                opt.AddPolicy("Warehouse Admin", policy => policy.RequireRole("Warehouse Manager", "Master"));
+            });
             return services;
         }
     }

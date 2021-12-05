@@ -8328,11 +8328,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\source\\repos\\something\\Supermarket\\Supermarket.Api\\Supermarket.Api.csproj",
+      "projectUniqueName": "C:\\Users\\User\\source\\repos\\Supermarket\\Supermarket.Api\\Supermarket.Api.csproj",
       "projectName": "Supermarket.Api",
-      "projectPath": "C:\\Users\\User\\source\\repos\\something\\Supermarket\\Supermarket.Api\\Supermarket.Api.csproj",
+      "projectPath": "C:\\Users\\User\\source\\repos\\Supermarket\\Supermarket.Api\\Supermarket.Api.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\source\\repos\\something\\Supermarket\\Supermarket.Api\\obj\\",
+      "outputPath": "C:\\Users\\User\\source\\repos\\Supermarket\\Supermarket.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -8349,11 +8349,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\User\\source\\repos\\something\\Supermarket\\Supermarket.Dal\\Supermarket.Dal.csproj": {
-              "projectPath": "C:\\Users\\User\\source\\repos\\something\\Supermarket\\Supermarket.Dal\\Supermarket.Dal.csproj"
+            "C:\\Users\\User\\source\\repos\\Supermarket\\Supermarket.Dal\\Supermarket.Dal.csproj": {
+              "projectPath": "C:\\Users\\User\\source\\repos\\Supermarket\\Supermarket.Dal\\Supermarket.Dal.csproj"
             },
-            "C:\\Users\\User\\source\\repos\\something\\Supermarket\\Supermarket.Models\\Supermarket.Models.csproj": {
-              "projectPath": "C:\\Users\\User\\source\\repos\\something\\Supermarket\\Supermarket.Models\\Supermarket.Models.csproj"
+            "C:\\Users\\User\\source\\repos\\Supermarket\\Supermarket.Models\\Supermarket.Models.csproj": {
+              "projectPath": "C:\\Users\\User\\source\\repos\\Supermarket\\Supermarket.Models\\Supermarket.Models.csproj"
             }
           }
         }
