@@ -10,7 +10,7 @@ using Supermarket.Dal.EfStructures;
 namespace Supermarket.Dal.EfStructures.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211204155948_InitialCreate")]
+    [Migration("20211205163206_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -621,10 +621,10 @@ namespace Supermarket.Dal.EfStructures.Migrations
                         .HasColumnType("int")
                         .HasColumnName("order_status_id");
 
-                    b.Property<bool?>("PeymentStatus")
+                    b.Property<bool?>("PaymentStatus")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasColumnName("peyment_status")
+                        .HasColumnName("payment_status")
                         .HasDefaultValueSql("((0))");
 
                     b.HasKey("Id");
@@ -655,6 +655,10 @@ namespace Supermarket.Dal.EfStructures.Migrations
                     b.Property<int?>("Quantity")
                         .HasColumnType("int")
                         .HasColumnName("quantity");
+
+                    b.Property<int?>("Total")
+                        .HasColumnType("int")
+                        .HasColumnName("total");
 
                     b.HasKey("OrderId", "ProductId")
                         .HasName("PK__order_pr__022945F643A30D72");

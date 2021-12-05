@@ -32,8 +32,8 @@ namespace Supermarket.Models.Entities
         public string OrderDescription { get; set; }
         [Column("branch_id")]
         public int? BranchId { get; set; }
-        [Column("peyment_status")]
-        public bool? PeymentStatus { get; set; }
+        [Column("payment_status")]
+        public bool? PaymentStatus { get; set; }
         [Column("created_at", TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
         [Column("delivered", TypeName = "datetime")]

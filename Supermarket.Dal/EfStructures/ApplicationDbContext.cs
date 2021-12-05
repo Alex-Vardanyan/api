@@ -325,7 +325,7 @@ namespace Supermarket.Dal.EfStructures
             {
                 entity.Property(e => e.OrderDescription).IsUnicode(false);
 
-                entity.Property(e => e.PeymentStatus).HasDefaultValueSql("((0))");
+                entity.Property(e => e.PaymentStatus).HasDefaultValueSql("((0))");
 
                 entity.HasOne(d => d.Branch)
                     .WithMany(p => p.Orders)

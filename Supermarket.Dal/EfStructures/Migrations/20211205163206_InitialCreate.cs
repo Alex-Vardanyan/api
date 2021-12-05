@@ -357,7 +357,7 @@ namespace Supermarket.Dal.EfStructures.Migrations
                     delivery_man_id = table.Column<int>(type: "int", nullable: true),
                     order_description = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: true),
                     branch_id = table.Column<int>(type: "int", nullable: true),
-                    peyment_status = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "((0))"),
+                    payment_status = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "((0))"),
                     created_at = table.Column<DateTime>(type: "datetime", nullable: true),
                     delivered = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
@@ -572,7 +572,8 @@ namespace Supermarket.Dal.EfStructures.Migrations
                 {
                     order_id = table.Column<int>(type: "int", nullable: false),
                     product_id = table.Column<int>(type: "int", nullable: false),
-                    quantity = table.Column<int>(type: "int", nullable: true)
+                    quantity = table.Column<int>(type: "int", nullable: true),
+                    total = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {

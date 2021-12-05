@@ -33,5 +33,10 @@ namespace Supermarket.Models.Entities
         [ForeignKey(nameof(ProdId))]
         [InverseProperty(nameof(Product.ProductPackages))]
         public virtual Product Prod { get; set; }
+
+        public decimal GetTotal()
+        {
+            return Prod.Volume.Value * DepQuantity.Value;
+        }
     }
 }

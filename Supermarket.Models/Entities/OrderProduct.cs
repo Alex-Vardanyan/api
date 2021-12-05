@@ -19,6 +19,8 @@ namespace Supermarket.Models.Entities
         public int ProductId { get; set; }
         [Column("quantity")]
         public int? Quantity { get; set; }
+        [Column("total")]
+        public int? Total { get; set; }
 
         [ForeignKey(nameof(OrderId))]
         [InverseProperty("OrderProducts")]
@@ -26,5 +28,10 @@ namespace Supermarket.Models.Entities
         [ForeignKey(nameof(ProductId))]
         [InverseProperty("OrderProducts")]
         public virtual Product Product { get; set; }
+
+        public decimal GetTotal()
+        {
+            return Product.Price.Value * Quantity.Value;
+        }
     }
 }
