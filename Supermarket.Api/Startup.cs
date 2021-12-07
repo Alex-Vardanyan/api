@@ -35,7 +35,7 @@ namespace Supermarket.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(MappingProfiles));
-            
+
             services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(_config.GetConnectionString("DefaultConnection")));
             services.AddDbContext<AppIdentityDbContext>(x => x.UseSqlServer(_config.GetConnectionString("IdentityConnection")));
             services.AddControllers();

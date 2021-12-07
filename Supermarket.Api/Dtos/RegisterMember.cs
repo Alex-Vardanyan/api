@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Supermarket.Api.Dtos
 {
-    public class RegisterDto
+    public class RegisterMemberDto
     {
         [Required(ErrorMessage = "Username is Required")]
         public string Username { get; set; }
@@ -24,5 +24,9 @@ namespace Supermarket.Api.Dtos
         public string Phonenumber { get; set; }
         [Required(ErrorMessage = "Location info is Required")]
         public LocationDto Location { get; set; }
+        [Required]
+        public string Role { get; set; }
+        [Required]
+        public int StartingSalary { get; set; }
     }
 }

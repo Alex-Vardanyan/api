@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Supermarket.Api.Dtos;
 using Supermarket.Api.Errors;
+using Supermarket.Dal.Services;
 using Supermarket.Models.Entities;
 using Supermarket.Models.Entities.Identity;
 using Supermarket.Models.Interfaces;
@@ -24,15 +25,17 @@ namespace Supermarket.Api.Controllers
         private readonly ITokenService _tokenService;
         private readonly IGenericRepository<User> _userRepo;
         private readonly IMapper _mapper;
+        private readonly IRegistrationInterface _registrationService;
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
-            ITokenService tokenService, IGenericRepository<User> userRepo, IMapper mapper)
+            ITokenService tokenService, IGenericRepository<User> userRepo, IMapper mapper, IRegistrationInterface registrationService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
             _userRepo = userRepo;
             _mapper = mapper;
+            _registrationService = registrationService;
         }
 
         [HttpGet]
@@ -82,7 +85,7 @@ namespace Supermarket.Api.Controllers
             {
                 Email = user.Email,
                 Token =  await _tokenService.CreateToken(user),
-                Username = user.UserName
+                Username = user.UserName,
             };
         }
 
@@ -94,6 +97,12 @@ namespace Supermarket.Api.Controllers
                 UserName = registerDto.Username,
                 Email = registerDto.Email,
             };
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new ApiResponse(400));
+            }
+
             var existingUser = await _userManager.FindByEmailAsync(user.Email);
             if (existingUser != null)
             {
@@ -111,6 +120,60 @@ namespace Supermarket.Api.Controllers
                 return BadRequest(new ApiResponse(400));
             }
 
+            var location = _mapper.Map<LocationDto, AddressLocation>(registerDto.Location);
+            var client = await _registrationService.Register(registerDto.Email, registerDto.Phonenumber, registerDto.Username,
+                registerDto.Firstname, registerDto.Lastname, "Client", location);
+            if (client == null)
+            {
+                return BadRequest(new ApiResponse(400, "Something went wrong"));
+            }
+            return new UserDto
+            {
+                Username = registerDto.Username,
+                Token = await _tokenService.CreateToken(user),
+                Email = registerDto.Email
+            };
+        }
+
+        [Authorize(Roles = "Master")]
+        [HttpPost("new-member")]
+        public async Task<ActionResult<UserDto>> RegisterWorker(RegisterMemberDto registerDto)
+        {
+            var user = new AppUser
+            {
+                UserName = registerDto.Username,
+                Email = registerDto.Email,
+            };
+
+            if (!ModelState.IsValid || (new string[] {"Master", "Warehouse Manager", "Warehouse Worker" }.Contains(registerDto.Role)))
+            {
+                return BadRequest(new ApiResponse(400));
+            }
+
+            var existingUser = await _userManager.FindByEmailAsync(user.Email);
+            if (existingUser != null)
+            {
+                return new BadRequestObjectResult(new ValidationErrorResponse { Errors = new[] { "An account with this email is already in use" } });
+            }
+            var result = await _userManager.CreateAsync(user, registerDto.Password);
+            if (!result.Succeeded)
+            {
+                return BadRequest(new ApiResponse(400));
+            }
+
+            var roleResult = await _userManager.AddToRoleAsync(user, registerDto.Role);
+            if (!roleResult.Succeeded)
+            {
+                return BadRequest(new ApiResponse(400));
+            }
+
+            var location = _mapper.Map<LocationDto, AddressLocation>(registerDto.Location);
+            var client = await _registrationService.Register(registerDto.Email, registerDto.Phonenumber, registerDto.Username,
+                registerDto.Firstname, registerDto.Lastname, registerDto.Role, location, registerDto.StartingSalary);
+            if (client == null)
+            {
+                return BadRequest(new ApiResponse(400, "Something went wrong"));
+            }
             return new UserDto
             {
                 Username = registerDto.Username,
